@@ -102,7 +102,7 @@ test: build-tests
 	make -C tests TESTS="$(TESTS)" DEBUG=$(DEBUG) ARCH=$(ARCH) OS=$(OS) WORKDIR=$(WORKDIR) test
 
 unit-test:
-	go test $(go list ./... | grep -v /eden/tests/)
+	go test $$(go list ./... | grep -v /eden/tests/)
 
 # create empty drives to use as additional volumes
 $(EMPTY_DRIVE).%:
