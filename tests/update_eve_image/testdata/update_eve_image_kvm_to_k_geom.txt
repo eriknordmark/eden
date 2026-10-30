@@ -3,13 +3,13 @@
 # (run-kvm-to-k-geom-matrix.sh) brings EVE up on each release in turn and runs
 # this with BRINGUP_EVE_VER + the expected start sizes.
 #
-# Unlike update_eve_image_kvm_to_k_resize.txt this deliberately does NOT deploy an
+# Unlike update_eve_image_kvm_to_k.txt this deliberately does NOT deploy an
 # app, defer content-tree deletes, or check blob reuse or the TPM seal. It proves
 # exactly one thing: whatever the starting geometry, driving kvm->k ends with the
 # full EVE-k target layout of 2+2+10+10 GiB, i.e. ESP-A 2G, the reserved ESP-B 2G,
 # IMGA 10G, IMGB 10G.
 #
-# Image sequence (same three-hop shape as the resize test):
+# Image sequence (same three-hop shape as update_eve_image_kvm_to_k.txt):
 #   1. START     : EVE up on the parameterized BRINGUP_EVE_VER (a stock release
 #                  whose geometry is asserted against START_* below). Does NOT carry
 #                  the conversion code.
@@ -357,8 +357,8 @@ exit 1
 # reboot-to-apply), the device re-checks and does the cross-flavor A/B install, then
 # boots EVE-k. Completion is slot-agnostic (the grow can relocate the active slot).
 #
-# Unlike the resize test's watch-conversion.sh this does NO /persist stress-fill
-# cleanup — this escript deploys no app and pre-fills nothing, so /persist stays
+# Unlike update_eve_image_kvm_to_k.txt's watch-conversion.sh this does NO /persist
+# stress-fill cleanup — this escript deploys no app and pre-fills nothing, so /persist stays
 # near-empty and there is nothing to free before the EVE-k cluster installs.
 set -uo pipefail
 EDEN="{{EdenConfig "eden.root"}}/{{EdenConfig "eden.bin-dist"}}/{{EdenConfig "eden.eden-bin"}}"

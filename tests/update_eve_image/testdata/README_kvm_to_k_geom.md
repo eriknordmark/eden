@@ -1,6 +1,6 @@
 # kvm->k geometry matrix (`update_eve_image_kvm_to_k_geom`)
 
-A geometry-only sibling of `update_eve_image_kvm_to_k_resize`. It proves that,
+A geometry-only sibling of `update_eve_image_kvm_to_k`. It proves that,
 whatever the boot disk's **starting** GPT layout, driving an EVE-kvm -> EVE-k
 base-OS upgrade ends with the full EVE-k target of **2+2+10+10 GiB**:
 

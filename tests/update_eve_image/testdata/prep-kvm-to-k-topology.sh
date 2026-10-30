@@ -89,9 +89,9 @@
 # single 64 GiB boot disk (the EVE-k/longhorn floor); the two-disk legs override it
 # to 32768 to get a 32 GiB boot + 32 GiB sdb (=> 64 total).
 #
-# The ext4 grow tail is created the way README_kvm_to_k_grow.md describes: boot
-# small once (storage-init creates P3 at the original size), stop, enlarge the
-# qcow2 + `sgdisk -e` to add the free tail, restart.
+# The ext4 grow tail is created by add_free_tail below: boot small once
+# (storage-init creates P3 at the original size), stop, enlarge the qcow2 +
+# `sgdisk -e` to add the free tail, restart.
 #
 # Usage:
 #   ./prep-kvm-to-k-topology.sh <topology> [--yes]
@@ -381,9 +381,8 @@ verify_console() {
 }
 
 # Enlarge a qcow2 boot disk by $2 GiB (default GROW_TAIL_GB) and relocate the backup
-# GPT so the free tail is usable (README_kvm_to_k_grow.md recipe). The caller passes
-# an explicit size when its base disk differs, so that base + tail stays at the
-# 64 GiB total. eden must be stopped.
+# GPT so the free tail is usable. The caller passes an explicit size when its base
+# disk differs, so that base + tail stays at the 64 GiB total. eden must be stopped.
 add_free_tail() {
     local img="$1" tail_gb="${2:-$GROW_TAIL_GB}" fmt
     [ -f "$img" ] || die "boot image not found: $img"

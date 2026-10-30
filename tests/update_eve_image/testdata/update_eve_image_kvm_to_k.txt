@@ -625,8 +625,8 @@ exit 1
 -- assert-check-decision.sh --
 #!/bin/bash
 # Assert storage-resizer's pre-flight `check` returns the EXPECTED decision on the
-# live boot disk. Generalizes the former assert-check-grow.sh: the expected
-# decision is arg 1, so one helper serves every format in the matrix. This is the
+# live boot disk. The expected decision is arg 1, so one helper serves every
+# format in the matrix. This is the
 # load-bearing precondition guard — if the bringup/topology was not set up for the
 # requested EXPECT_DECISION, the test would silently exercise a different path.
 #
